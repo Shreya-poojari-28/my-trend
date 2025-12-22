@@ -1,8 +1,8 @@
 .header {
-    background-color: #f8f9fa;
     padding: 10px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #F3D9B1;
+    color: #000000;
 }
 .logo img {
     width: 200px;
@@ -29,4 +29,34 @@
     color: #000;
     font-size: 16px;
     font-weight: 600;
+}
+
+.theme {
+  width: 80px;
+  height: 40px;
+  background: #ddd;
+  border-radius: 50px;
+  position: relative;
+  padding: 5px;
+}
+
+.inner-theme {
+  width: 30px;
+  height: 30px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* positions */
+.theme.light .inner-theme {
+  transform: translateX(0);
+}
+
+.theme.dark .inner-theme {
+  transform: translateX(40px);
 }
