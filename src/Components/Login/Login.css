@@ -1,0 +1,44 @@
+.login {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.login::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url('../../assets/landscape-7373484_1920.jpg') center / cover no-repeat;
+    filter: blur(8px);
+    transform: scale(1.1); 
+    z-index: -1;
+}
+
+.login-container {
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+    border: none;
+    outline: none;
+    border-radius: 12px;
+}
+
+.login-btn {
+    border: none;
+    border-radius: 12px;
+    background-color: #f5f5f5;
+}
+
+.password-group {
+    position: relative;
+}
+
+.password-show {
+   position: absolute;
+   top: 8px;
+   right: 16px;
+   cursor: pointer;
+}

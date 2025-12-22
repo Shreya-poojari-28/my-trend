@@ -1,0 +1,39 @@
+.footer {
+  background-color: #f5deb3; /* same as header */
+  padding: 16px 0;
+  margin-top: 40px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-brand h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.footer-brand p {
+  margin: 4px 0 0;
+  font-size: 13px;
+}
+
+.footer-copy p {
+  margin: 0;
+  font-size: 13px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
