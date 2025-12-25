@@ -6,6 +6,11 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.product-container.dark{
+  background-color: #303336;
+  color: #f0f0f0;
+}
+
 .product-container img {
     width: 100%;
     height: 65%;
