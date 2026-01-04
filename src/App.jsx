@@ -4,7 +4,8 @@ import AppRoutes from './AppRoutes/AppRoutes'
 import { ThemeProvider } from './ThemeProvider/ThemeProvider';
 
 const App = () => {
-  const [theme, setTheme] = useState("light");
+  const storedTheme = localStorage.getItem('theme') || 'light';
+  const [theme, setTheme] = useState(storedTheme);
   return (
     <ThemeProvider value={{ theme, setTheme }}>
       <BrowserRouter>

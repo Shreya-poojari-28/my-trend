@@ -8,6 +8,17 @@ const Header = () => {
   const theme = themeData.theme;
   const setTheme = themeData.setTheme;
 
+  const handleThemeToggle = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light'
+    setTheme(newTheme)
+    localStorage.setItem('theme', newTheme)
+  }
+
+  const handleLogOut = () => {
+    sessionStorage.removeItem('token');
+    window.location.reload();
+  }
+
   return (
     <div className="header px-5">
       <div className="header-container d-flex justify-content-between align-items-center">
@@ -27,13 +38,18 @@ const Header = () => {
           <div className={`theme ${theme}`}>
             <div
               className="inner-theme"
-              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+              onClick={handleThemeToggle}
             >
               {theme === "light"
                 ? <i className="fa-solid fa-moon"></i>
                 : <i className="fa-solid fa-sun"></i>
               }
             </div>
+          </div>
+          <div className="log-out cursor-pointer"
+            onClick={handleLogOut}
+          >
+            <i className="fa-solid fa-right-from-bracket"></i>
           </div>
         </div>
       </div>
