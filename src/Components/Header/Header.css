@@ -1,38 +1,38 @@
 .header {
-    padding: 10px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #F3D9B1;
-    color: #000000;
-    position: sticky;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
+  padding: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #F3D9B1;
+  color: #000000;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
+
 .logo img {
-    width: 200px;
-    height: auto;
+  width: 200px;
+  height: auto;
 }
 
-.wishList, .cart {
-    position: relative;
-    cursor: pointer;
+.wish-icon,
+.cart-icon {
+  position: relative;
+  cursor: pointer;
 }
 
-.wishList i,
-.cart i
-{
-    font-size: 24px;
+.wish-icon i,
+.cart-icon i {
+  font-size: 24px;
 }
 
-.wishList .count, 
-.cart .count
-{
-    position: absolute;
-    top: -12px;
-    right: -10px;
-    color: #000;
-    font-size: 16px;
-    font-weight: 600;
+.wish-icon .count,
+.cart-icon .count {
+  position: absolute;
+  top: -12px;
+  right: -10px;
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .theme {
@@ -63,4 +63,128 @@
 
 .theme.dark .inner-theme {
   transform: translateX(40px);
+}
+
+.header-container {
+  flex-wrap: wrap;
+}
+
+.hamburger {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  
+}
+
+@media (max-width: 768px) {
+  .header-right {
+    gap: 20px !important;
+  }
+
+  .wishList i,
+  .cart i {
+    font-size: 20px;
+  }
+
+  .wishList .count,
+  .cart .count {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo img {
+    width: 120px;
+  }
+
+  .theme {
+    width: 60px;
+    height: 32px;
+  }
+
+  .inner-theme {
+    width: 24px;
+    height: 24px;
+  }
+
+  .theme.dark .inner-theme {
+    transform: translateX(28px);
+  }
+}
+
+@media (max-width: 576px) {
+  .header-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: space-around;
+  }
+}
+
+.mobile,
+.theme.open {
+  display: none;
+}
+
+.mobile.open,
+.theme {
+  display: block;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .logo img {
+    width: 150px;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .hamburger-menu {
+    position: absolute;
+    top: 12px;
+    right: 36px;
+    font-size: 18px;
+  }
+
+  .header-right {
+    position: fixed;
+    top: 0px;
+    right: -100%;
+    width: 300px;
+    height: calc(100vh - 250px);
+    background: #F3D9B1;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 25px !important;
+    transition: right 0.3s ease-in-out;
+    /* box-shadow: -2px 0 6px rgba(0, 0, 0, 0.15); */
+  }
+
+  .xmark {
+    align-self: flex-end;
+    font-size: 18px;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 12px;
+  }
+
+  .header-right.open {
+    right: 0;
+  }
+
+  .header-right>div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
 }

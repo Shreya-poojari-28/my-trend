@@ -9,7 +9,7 @@ const Home = () => {
   const themeData = useContext(ThemeProvider)
   const theme = themeData.theme;
   const products = useSelector((state) => state?.product || [])
-  console.log('Products', products);
+  // console.log('Products', products);
   const [inrRate, setInrRate] = useState(null);
 
   const convertDollarToRupee = async () => {

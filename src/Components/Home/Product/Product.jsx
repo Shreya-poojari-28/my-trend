@@ -24,7 +24,7 @@ const Product = ({
     const handleWishlistToggle = () => {
         setWishlisted((prev) => {
             if (prev) {
-                removeWishListItem({ productId });
+                dispatch(removeWishListItem({ productId }))
             } else {
                 dispatch(addToWishList({ productId, image, price, rating, title }));
             }

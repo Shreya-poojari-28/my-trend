@@ -1,12 +1,12 @@
-import React, { useContext } from 'react'
-import MyTrendsLogo from '../../assets/logo.svg';
+import React, { useContext, useEffect, useState } from 'react'
+import MyTrendsLogo from '../../assets/logo.svg'
 import './Header.css'
-import { ThemeProvider } from '../../ThemeProvider/ThemeProvider';
+import { ThemeProvider } from '../../ThemeProvider/ThemeProvider'
+import { useSelector } from 'react-redux'
 
 const Header = () => {
-  const themeData = useContext(ThemeProvider)
-  const theme = themeData.theme;
-  const setTheme = themeData.setTheme;
+  const { theme, setTheme } = useContext(ThemeProvider)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const handleThemeToggle = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light'
@@ -15,43 +15,111 @@ const Header = () => {
   }
 
   const handleLogOut = () => {
-    sessionStorage.removeItem('token');
-    window.location.reload();
+    sessionStorage.removeItem('token')
+    window.location.reload()
   }
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsMenuOpen(false)
+      }
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  const cartItem = useSelector((state) => state?.cart || [])
+  const cartItemCount = cartItem?.reduce((accumulator, currentItem) => accumulator + currentItem.quantity, 0)
+  const wishListItemCount = useSelector((state) => state?.wishList || 0);
+  console.log(wishListItemCount);
 
   return (
     <div className="header px-5">
       <div className="header-container d-flex justify-content-between align-items-center">
+
+        {/* Logo */}
         <div className="logo header-left">
           <img src={MyTrendsLogo} alt="My Trends Logo" />
         </div>
 
-        <div className="header-right d-flex align-items-center gap-5">
-          <div className="wishList">
-            <i className="fa-solid fa-heart"></i>
-            <span className="count">2</span>
+        {/* Hamburger (Mobile only) */}
+        <div
+          className="hamburger hamburger-menu"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          <i className="fa-solid fa-bars"></i>
+        </div>
+
+        {/* Right Menu */}
+        <div className={`header-right d-flex align-items-center gap-5 ${isMenuOpen ? 'open' : ''}`}>
+          <span
+            className="hamburger xmark"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <i className="fa-solid fa-xmark"></i>
+          </span>
+          <div className="wishList d-flex gap-4">
+            <div className='wish-icon laptop'>
+              <i className="fa-solid fa-heart"></i>
+              <span className="count">{wishListItemCount?.length > 0 ? wishListItemCount?.length : ''}</span>
+            </div>
+
+            <div className={`mobile ${isMenuOpen ? 'open' : ''}`}>
+              WishList
+            </div>
           </div>
-          <div className="cart">
-            <i className="fa-solid fa-bag-shopping"></i>
-            <span className="count">4</span>
+
+          <div className="cart d-flex gap-4">
+            <div className="cart-icon laptop">
+              <i className="fa-solid fa-bag-shopping"></i>
+              <span className="count">{cartItemCount > 0 ? cartItemCount : ''}</span>
+            </div>
+
+            <div className={`mobile ${isMenuOpen ? 'open' : ''}`}>
+              Cart
+            </div>
           </div>
-          <div className={`theme ${theme}`}>
-            <div
-              className="inner-theme"
-              onClick={handleThemeToggle}
+
+          <div className={`theme ${theme} ${isMenuOpen ? 'open' : ''}`}>
+            <div className="inner-theme"
+              onClick={() => {
+                handleThemeToggle()
+              }}
+
             >
-              {theme === "light"
+              {theme === 'light'
                 ? <i className="fa-solid fa-moon"></i>
                 : <i className="fa-solid fa-sun"></i>
               }
             </div>
           </div>
-          <div className="log-out cursor-pointer"
-            onClick={handleLogOut}
+
+          <div className={`mobile cursor-pointer ${isMenuOpen ? 'open' : ''}`}
+            onClick={() => {
+              handleThemeToggle()
+              setIsMenuOpen(false)
+            }}
           >
+            {theme === 'light'
+              ? <span>
+                <i className="fa-solid fa-moon me-4"></i> Dark Mode
+              </span>
+              : <span>
+                <i className="fa-solid fa-sun me-3"></i> Light Mode
+              </span>
+            }
+          </div>
+
+          <div className="log-out cursor-pointer d-flex gap-4" onClick={handleLogOut}>
             <i className="fa-solid fa-right-from-bracket"></i>
+
+            <div className={`mobile ${isMenuOpen ? 'open' : ''}`}>
+              Logout
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   )
