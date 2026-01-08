@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import './Product.css'
-import { ThemeProvider } from '../../../ThemeProvider/ThemeProvider'
+import { ThemeProvider } from '../../../Contexts/ThemeProvider/ThemeProvider'
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../../store/slices/cartSlice';
 import { addToWishList, removeWishListItem } from '../../../store/slices/wishListSlice';

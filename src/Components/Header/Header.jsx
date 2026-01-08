@@ -1,12 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
 import MyTrendsLogo from '../../assets/logo.svg'
 import './Header.css'
-import { ThemeProvider } from '../../ThemeProvider/ThemeProvider'
+import { ThemeProvider } from '../../Contexts/ThemeProvider/ThemeProvider'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
   const { theme, setTheme } = useContext(ThemeProvider)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const navigate = useNavigate()
 
   const handleThemeToggle = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light'
@@ -39,7 +42,10 @@ const Header = () => {
       <div className="header-container d-flex justify-content-between align-items-center">
 
         {/* Logo */}
-        <div className="logo header-left">
+        <div 
+        className="logo header-left cursor-pointer"
+        onClick={() => navigate('/home')}
+        >
           <img src={MyTrendsLogo} alt="My Trends Logo" />
         </div>
 
@@ -59,7 +65,13 @@ const Header = () => {
           >
             <i className="fa-solid fa-xmark"></i>
           </span>
-          <div className="wishList d-flex gap-4">
+          <div 
+          className="wishList d-flex gap-4 cursor-pointer"
+          onClick={() => {
+            navigate('/wishlist')
+            setIsMenuOpen(false)
+          }}
+          >
             <div className='wish-icon laptop'>
               <i className="fa-solid fa-heart"></i>
               <span className="count">{wishListItemCount?.length > 0 ? wishListItemCount?.length : ''}</span>
@@ -70,7 +82,13 @@ const Header = () => {
             </div>
           </div>
 
-          <div className="cart d-flex gap-4">
+          <div 
+          className="cart d-flex gap-4 cursor-pointer"
+          onClick={() => {
+            navigate('/cart')
+            setIsMenuOpen(false)
+          }}
+          >
             <div className="cart-icon laptop">
               <i className="fa-solid fa-bag-shopping"></i>
               <span className="count">{cartItemCount > 0 ? cartItemCount : ''}</span>
