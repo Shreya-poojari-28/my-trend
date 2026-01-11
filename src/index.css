@@ -31,3 +31,11 @@ body,
 .cursor-pointer {
     cursor: pointer;
 }
+
+body {
+  overflow-y: scroll;
+}
+
+.modal-open {
+  padding-right: 0 !important;
+}

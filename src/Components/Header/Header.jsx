@@ -4,10 +4,12 @@ import './Header.css'
 import { ThemeProvider } from '../../Contexts/ThemeProvider/ThemeProvider'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import LogoutModal from './LogoutModal'
 
 const Header = () => {
   const { theme, setTheme } = useContext(ThemeProvider)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [showLogoutModal, setShowLogoutModal] = useState(false)
 
   const navigate = useNavigate()
 
@@ -18,8 +20,7 @@ const Header = () => {
   }
 
   const handleLogOut = () => {
-    sessionStorage.removeItem('token')
-    window.location.reload()
+    setShowLogoutModal(true)
   }
 
   useEffect(() => {
@@ -35,7 +36,6 @@ const Header = () => {
   const cartItem = useSelector((state) => state?.cart || [])
   const cartItemCount = cartItem?.reduce((accumulator, currentItem) => accumulator + currentItem.quantity, 0)
   const wishListItemCount = useSelector((state) => state?.wishList || 0);
-  console.log(wishListItemCount);
 
   return (
     <div className="header px-5">
@@ -139,6 +139,9 @@ const Header = () => {
         </div>
 
       </div>
+      {showLogoutModal && (
+        <LogoutModal show={showLogoutModal} onHide={() => setShowLogoutModal(false)} />
+      )}
     </div>
   )
 }

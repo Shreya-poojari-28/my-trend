@@ -1,25 +1,34 @@
-.product-container{
+.product-container {
   width: 250px;
   height: 320px;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
 }
 
-.product-container.dark{
+.product-container:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  transition: all 0.3s ease-in-out;
+}
+
+.product-container.dark:hover {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.product-container.dark {
   background-color: #303336;
   color: #f0f0f0;
 }
 
 .product-container img {
-    width: 100%;
-    height: 45%;
-    object-fit: contain;
+  width: 100%;
+  height: 45%;
+  object-fit: contain;
 }
 
 .rating-stars i {
-    font-size: small;
+  font-size: small;
 }
 
 .button-container button {

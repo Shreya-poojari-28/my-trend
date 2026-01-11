@@ -3,12 +3,32 @@
   height: 320px;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
+}
+
+.wish-container:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+}
+
+.wish-container.dark:hover {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
 
 .wish-container img {
     width: 100%;
     height: 45%;
     object-fit: contain;
+}
+
+.empty-wishes {
+    height: 50vh;
+    text-align: center;
+    color: #888;
+}
+
+.empty-heart-icon {
+    font-size: 64px;
+    color: #ff6b6b;
 }

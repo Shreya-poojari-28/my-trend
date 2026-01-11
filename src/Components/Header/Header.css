@@ -75,9 +75,7 @@
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
-  
-}
+@media (max-width: 768px) {}
 
 @media (max-width: 768px) {
   .header-right {
@@ -187,4 +185,49 @@
     display: flex;
     align-items: center;
   }
+}
+
+/* Logout Modal Styles */
+
+.actions button {
+  background-color: transparent;
+  border: 1px solid #000;
+  color: #000;
+}
+
+.actions button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+/* Target modal-content via dialogClassName */
+.dark-modal .modal-content {
+  background-color: #27292B;
+  color: #FFFFFF;
+}
+
+/* Header border */
+.dark-modal .modal-header {
+  border-bottom: 1px solid #3a3d40;
+}
+
+/* Body text */
+.dark-modal .modal-body {
+  color: #FFFFFF;
+}
+
+/* Close (X) button visibility */
+.dark-modal .btn-close {
+  filter: invert(1);
+}
+
+.dark-modal .actions button {
+  background-color: transparent;
+  border: 1px solid #FFFFFF;
+  color: #FFFFFF;
+}
+
+.dark-modal .actions button:hover {
+  background-color: #FFFFFF;
+  color: #000000;
 }
