@@ -10,15 +10,25 @@ const WishList = () => {
 
   return (
     <div className='d-flex align-items-center justify-content-center gap-3 flex-wrap py-5 wishList-container'>
-      {wishlistItems.length > 0 && <h2 className='w-100 text-center mb-4'>My Wish List</h2>}
-      {wishlistItems.length > 0 ? (
-        wishlistItems.map((item) => (
-          <WishItem key={item.productId} {...item} />
-        ))
-      ) : (
-        <EmptyWishes/>
-      )
-      }
+      <div className="container py-5">
+        {wishlistItems.length > 0 && (
+          <h2 className="text-center mb-4 fw-bold display-6">
+            My Wishlist
+          </h2>
+        )}
+
+        {wishlistItems.length > 0 ? (
+          <div className="row g-4 justify-content-center">
+            {wishlistItems.map((item) => (
+              <div className="col-lg-3 col-md-4 col-sm-6" key={item.productId}>
+                <WishItem {...item} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <EmptyWishes />
+        )}
+      </div>
     </div>
   )
 }

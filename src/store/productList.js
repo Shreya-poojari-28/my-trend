@@ -238,5 +238,129 @@ export const productList = [
             "rate": 3.6,
             "count": 145
         }
+    },
+
+    // Add below your existing 20 items
+
+    {
+        "id": 21,
+        "title": "Vintage Leather Backpack",
+        "price": 79.99,
+        "description": "Handcrafted brown leather backpack with padded laptop sleeve and multiple compartments for travel or daily use.",
+        "category": "bags",
+        "image": "https://images.unsplash.com/photo-1522199710521-72d69614c702",
+        "rating": {
+            "rate": 4.5,
+            "count": 310
+        }
+    },
+    {
+        "id": 22,
+        "title": "Wireless Bluetooth Speaker",
+        "price": 49.99,
+        "description": "Portable wireless speaker with deep bass, 12-hour battery backup and splash-resistant design.",
+        "category": "electronics",
+        "image": "https://cdn.pixabay.com/photo/2017/06/04/16/52/speaker-2371550_1280.jpg",
+        "rating": {
+            "rate": 4.2,
+            "count": 520
+        }
+    },
+    {
+        "id": 23,
+        "title": "Ceramic Coffee Mug Set",
+        "price": 24.99,
+        "description": "Set of 4 premium ceramic coffee mugs, microwave and dishwasher safe, matte finish.",
+        "category": "home & kitchen",
+        "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93",
+        "rating": {
+            "rate": 4.6,
+            "count": 200
+        }
+    },
+    {
+        "id": 24,
+        "title": "Smart Fitness Watch",
+        "price": 89.0,
+        "description": "Fitness tracker watch with heart-rate monitor, sleep tracking, step counter and mobile notifications.",
+        "category": "electronics",
+        "image": "https://cdn.pixabay.com/photo/2016/09/10/21/54/watch-1660232_1280.jpg",
+        "rating": {
+            "rate": 4.1,
+            "count": 870
+        }
+    },
+    {
+        "id": 25,
+        "title": "Minimalist Desk Lamp",
+        "price": 34.99,
+        "description": "LED desk lamp with touch control brightness, flexible neck and energy-saving design.",
+        "category": "home decor",
+        "image": "https://images.unsplash.com/photo-1519710164239-da123dc03ef4",
+        "rating": {
+            "rate": 4.3,
+            "count": 165
+        }
+    },
+    {
+        "id": 26,
+        "title": "Running Shoes for Men",
+        "price": 59.99,
+        "description": "Lightweight breathable running shoes designed for comfort and performance during long runs or gym workouts.",
+        "category": "men's clothing",
+        "image": "https://cdn.pixabay.com/photo/2016/12/11/15/48/sneaker-1899644_1280.jpg",
+        "rating": {
+            "rate": 4.4,
+            "count": 742
+        }
+    },
+    {
+        "id": 27,
+        "title": "Women's Casual Summer Dress",
+        "price": 29.99,
+        "description": "Soft and comfortable floral summer dress perfect for daily wear, beach outings or vacations.",
+        "category": "women's clothing",
+        "image": "https://cdn.pixabay.com/photo/2023/08/23/09/35/ai-generated-8208064_1280.jpg",
+        "rating": {
+            "rate": 4.7,
+            "count": 390
+        }
+    },
+    {
+        "id": 28,
+        "title": "Noise Isolating Earbuds",
+        "price": 19.99,
+        "description": "In-ear wired earbuds with built-in microphone and passive noise isolation.",
+        "category": "electronics",
+        "image": "https://cdn.pixabay.com/photo/2025/08/31/23/23/blue-background-9808403_1280.png",
+        "rating": {
+            "rate": 3.9,
+            "count": 280
+        }
+    },
+    {
+        "id": 29,
+        "title": "Wooden Study Table",
+        "price": 149.99,
+        "description": "Solid oak wood study table with drawer storage, suitable for home office or student rooms.",
+        "category": "furniture",
+        "image": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7",
+        "rating": {
+            "rate": 4.8,
+            "count": 129
+        }
+    },
+    {
+        "id": 30,
+        "title": "Stainless Steel Water Bottle",
+        "price": 18.50,
+        "description": "Double-wall insulated stainless steel bottle keeps drinks cold for 24 hours and hot for 12 hours.",
+        "category": "sports",
+        "image": "https://cdn.pixabay.com/photo/2019/08/22/14/30/clean-kanteen-4423681_1280.jpg",
+        "rating": {
+            "rate": 4.5,
+            "count": 610
+        }
     }
+
 ]

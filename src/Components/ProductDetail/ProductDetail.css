@@ -1,0 +1,24 @@
+.rating-starts {
+    color: #FFD700;
+}
+
+.rating {
+    background-color: #4CAF50;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.product-detail-container img {
+  transition: transform .3s ease;
+}
+
+.product-detail-container img:hover {
+  transform: scale(1.02);
+}
+
+.list-group.dark .list-group-item {
+    background-color: #27292B;
+    color: #f1f1f1;
+}

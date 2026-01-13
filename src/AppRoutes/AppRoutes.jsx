@@ -6,6 +6,7 @@ import PrivateRoutes from './PrivateRoutes'
 import Home from '../Components/Home/Home'
 import WishList from '../Components/WishList/WishList'
 import Cart from '../Components/Cart/Cart'
+import ProductDetail from '../Components/ProductDetail/ProductDetail'
 
 const AppRoutes = () => {
     return (
@@ -21,6 +22,9 @@ const AppRoutes = () => {
             </Route>
             <Route path='/cart' element={<PrivateRoutes />}>
                 <Route index element={<Cart />} />
+            </Route>
+            <Route path='/product/:id' element={<PrivateRoutes />}>
+                <Route index element={<ProductDetail />} />
             </Route>
         </Routes>
     )

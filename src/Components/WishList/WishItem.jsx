@@ -4,38 +4,17 @@ import { addToCart } from '../../store/slices/cartSlice';
 import { useDispatch } from 'react-redux';
 import { removeWishListItem } from '../../store/slices/wishListSlice';
 import { ThemeProvider } from '../../Contexts/ThemeProvider/ThemeProvider';
-import { ruppeeFormatter } from '../../Helper';
+import { renderStars, ruppeeFormatter } from '../../Helper';
+import { useNavigate } from 'react-router-dom';
 
 const WishItem = ({ ...item }) => {
     const dispatch = useDispatch()
+    const navigate = useNavigate();
+
     const { inrRate } = useContext(CurrencyContext);
     const theme = useContext(ThemeProvider).theme;
 
     const [cartAdded, setCartAdded] = useState(false);
-
-    const renderStars = (rate) => {
-        const totalStars = 5;
-        const fullStars = Math.floor(rate);
-        const hasHalfStar = rate % 1 >= 0.5;
-        const emptyStars = totalStars - fullStars - (hasHalfStar ? 1 : 0);
-
-        return (
-            <>
-                {/* Full stars */}
-                {[...Array(fullStars)].map((_, i) => (
-                    <i key={`full-${i}`} className="fa-solid fa-star"></i>
-                ))}
-
-                {/* Half star */}
-                {hasHalfStar && <i className="fa-solid fa-star-half-stroke"></i>}
-
-                {/* Empty stars */}
-                {[...Array(emptyStars)].map((_, i) => (
-                    <i key={`empty-${i}`} className="fa-regular fa-star"></i>
-                ))}
-            </>
-        );
-    };
 
     const handleCartToggle = () => {
         // setCartAdded((prevState) => !prevState);
@@ -56,38 +35,60 @@ const WishItem = ({ ...item }) => {
     const formattedDiscountedPrice = discountedPrice.toLocaleString('en-IN', { maximumFractionDigits: 0 })
 
     return (
-        <div className='wishItem'>
-            <div className={`wish-container p-4 ${theme}`}>
-                <img src={item.image} alt={item.title} />
-                <div className="item-details">
-                    <p>{(item?.title).slice(0, 20)}...</p>
-                    <p>
-                        {/* Rating: {rating.rate} */}
-                        <span className="rating-stars">
-                            {renderStars(item?.rating.rate)}
-                        </span>
-                        <span className="rating-count mx-2">
-                            ({item?.rating.count})
-                        </span>
-                    </p>
-                    <p className="price">
-                        <span className="mx-2 fw-bold">
-                            ₹ {formattedDiscountedPrice}
-                        </span>
-                        <small className={`original-price ${theme === 'dark' ? '' : 'text-muted'} text-decoration-line-through`}>
+        <div
+            className='wishItem cursor-pointer'
+            onClick={() => navigate(`/product/${item.productId}`, { state: { discountPercent: item.discountPercent, inrRate } })}
+        >
+            <div className={`wish-container card shadow-sm border-0 rounded-4 ${theme === "dark" ? "bg-dark text-light" : "bg-white"}`}>
+                <div className="p-3 text-center">
+                    <img
+                        src={item.image}
+                        alt={item.title}
+                        className="img-fluid"
+                        style={{ height: "160px", objectFit: "contain" }}
+                    />
+                </div>
+
+                <div className="card-body">
+                    <h6 className="fw-semibold text-truncate">{item.title}</h6>
+
+                    <div className="d-flex align-items-center mt-1">
+                        <span className="me-2 rating-star">{renderStars(item.rating.rate)}</span>
+                        <small className="text-muted">({item.rating.count})</small>
+                    </div>
+
+                    <div className="mt-2">
+                        <span className="fw-bold fs-5">₹ {formattedDiscountedPrice}</span>
+                        <small className="text-muted text-decoration-line-through ms-2">
                             ₹ {formattedOriginalPrice}
                         </small>
-                        &nbsp;
-                        <small className="discount text-success fw-bold">
+                        <span className="badge bg-success ms-2">
                             {item.discountPercent}% OFF
-                        </small>
-                    </p>
-                </div>
-                <div className="button-container text-center my-2">
-                    <button className="cart-btn" onClick={handleCartToggle}>{cartAdded ? "Remove" : "Add"} item</button>
-                    <button className="wishlist-btn" onClick={handleWishlistToggle}>
-                        <i className="fa-solid fa-heart"></i>
-                    </button>
+                        </span>
+                    </div>
+
+                    <div className="d-flex justify-content-between mt-3">
+                        <button
+                            className={`btn btn-outline-${theme === "dark" ? "light" : "dark"} w-75 rounded-pill`}
+                            onClick={(e) => {
+                                handleCartToggle();
+                                e.stopPropagation();
+                            }}
+                        >
+                            <i className="fa-solid fa-cart-plus me-2"></i>
+                            Add to Cart
+                        </button>
+
+                        <button
+                            className="wish rounded-circle ms-2"
+                            onClick={(e) => {
+                                handleWishlistToggle();
+                                e.stopPropagation();
+                            }}
+                        >
+                            <i className="fa-solid fa-heart"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
