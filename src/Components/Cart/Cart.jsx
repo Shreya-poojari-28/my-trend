@@ -6,6 +6,7 @@ import { ThemeProvider } from '../../Contexts/ThemeProvider/ThemeProvider'
 import { ruppeeFormatter } from '../../Helper'
 import './Cart.css'
 import { decreaseItemQuantity, increaseItemQuantity, removeCartItem } from '../../store/slices/cartSlice'
+import { toast } from 'react-toastify'
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart)
@@ -26,6 +27,7 @@ const Cart = () => {
 
   const handleRemoveItem = (item) => {
     dispatch(removeCartItem({ productId: item.productId }))
+    toast.warn("Removed from cart!");
   }
 
   const grandTotal = cartItems.reduce((total, item) => {

@@ -37,14 +37,20 @@ const Header = () => {
   const cartItemCount = cartItem?.reduce((accumulator, currentItem) => accumulator + currentItem.quantity, 0)
   const wishListItemCount = useSelector((state) => state?.wishList || 0);
 
+  window.addEventListener("scroll", () => {
+    const header = document.querySelector(".header");
+    if (window.scrollY > 5) header.classList.add("scrolled");
+    else header.classList.remove("scrolled");
+  });
+
   return (
     <div className="header px-5">
       <div className="header-container d-flex justify-content-between align-items-center">
 
         {/* Logo */}
-        <div 
-        className="logo header-left cursor-pointer"
-        onClick={() => navigate('/home')}
+        <div
+          className="logo header-left cursor-pointer"
+          onClick={() => navigate('/home')}
         >
           <img src={MyTrendsLogo} alt="My Trends Logo" />
         </div>
@@ -65,12 +71,12 @@ const Header = () => {
           >
             <i className="fa-solid fa-xmark"></i>
           </span>
-          <div 
-          className="wishList d-flex gap-4 cursor-pointer"
-          onClick={() => {
-            navigate('/wishlist')
-            setIsMenuOpen(false)
-          }}
+          <div
+            className="wishList d-flex gap-4 cursor-pointer"
+            onClick={() => {
+              navigate('/wishlist')
+              setIsMenuOpen(false)
+            }}
           >
             <div className='wish-icon laptop'>
               <i className="fa-solid fa-heart"></i>
@@ -82,12 +88,12 @@ const Header = () => {
             </div>
           </div>
 
-          <div 
-          className="cart d-flex gap-4 cursor-pointer"
-          onClick={() => {
-            navigate('/cart')
-            setIsMenuOpen(false)
-          }}
+          <div
+            className="cart d-flex gap-4 cursor-pointer"
+            onClick={() => {
+              navigate('/cart')
+              setIsMenuOpen(false)
+            }}
           >
             <div className="cart-icon laptop">
               <i className="fa-solid fa-bag-shopping"></i>

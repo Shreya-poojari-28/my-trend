@@ -33,3 +33,77 @@
 body.dark .card {
   backdrop-filter: blur(8px);
 }
+
+.empty-wishes-container {
+  height: 70vh;
+  text-align: center;
+  color: #555;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: containerFade 0.8s ease-in-out;
+}
+
+/* Heart animation */
+.heart-animation i {
+  font-size: 5rem;
+  color: #ff6b81;
+  animation: heartbeat 1.5s infinite;
+  transition: transform 0.3s ease;
+}
+
+.heart-animation i:hover {
+  transform: scale(1.2) rotate(-10deg);
+}
+
+/* Fade-in text animation */
+.fade-in-text {
+  opacity: 0;
+  animation: fadeInUp 0.8s forwards;
+}
+
+.delay-1 {
+  animation-delay: 0.3s;
+}
+
+.delay-2 {
+  animation-delay: 0.6s;
+}
+
+/* Button styling */
+.explore-btn {
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  background: linear-gradient(90deg, #ff6b81, #ff4757);
+  color: #fff;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.explore-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #ff4757, #ff6b81);
+}
+
+/* Animations */
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.15); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.15); }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes containerFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

@@ -28,45 +28,59 @@ const Login = () => {
       sessionStorage.setItem("email", values.email_id)
     }
   })
+  
   return (
     <div className="login d-flex justify-content-center align-items-center">
-      <div className="login-container">
-        <h1 className='mb-4 text-center'>Login</h1>
-        <form onSubmit={formik.handleSubmit} className='form-fields d-flex gap-3 flex-column'>
-          <div className="email-group">
+      <div className="login-card shadow-lg p-4 p-md-5">
+        <h2 className="fw-bold text-center mb-4">Welcome Back</h2>
+        <p className="text-center text-muted mb-4">Sign in to continue</p>
+
+        <form onSubmit={formik.handleSubmit} className="d-flex flex-column gap-3">
+
+          {/* Email */}
+          <div>
+            <label className="form-label fw-semibold">Email</label>
             <input
               type="email"
               name="email_id"
-              placeholder="Email"
-              className={`form-control py-2 px-4`}
+              placeholder="Enter email"
+              className={`form-control form-control-lg rounded-4 ${formik.touched.email_id && formik.errors.email_id ? 'is-invalid' : ''}`}
               value={formik.values.email_id}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
-            {formik.touched.email_id && formik.errors.email_id ? (
-              <div className="error">{formik.errors.email_id}</div>
-            ) : null
-            }
+            {formik.touched.email_id && formik.errors.email_id && (
+              <div className="invalid-feedback">{formik.errors.email_id}</div>
+            )}
           </div>
+
+          {/* Password */}
           <div className="password-group">
+            <label className="form-label fw-semibold">Password</label>
             <input
               type={showPassword ? 'text' : 'password'}
               name="password"
-              placeholder='Password'
-              className={`form-control py-2 px-4`}
+              placeholder="Enter password"
+              className={`form-control form-control-lg rounded-4 `}
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
-            {formik.touched.password && formik.errors.password ? (
+            {formik.touched.password && formik.errors.password && (
               <div className="error">{formik.errors.password}</div>
-            ) : null
-            }
-            <span className="password-show" onClick={() => setShowPassword((prev) => !prev)}>
-              <i class={`fa-regular fa-eye${showPassword ? '-slash' : ''}`}></i>
+            )}
+
+            <span className="password-show">
+              <i
+                className={`fa-regular ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}
+                onClick={() => setShowPassword(prev => !prev)}
+              ></i>
             </span>
           </div>
-          <button type="submit" className='login-btn p-2'>Login</button>
+
+          <button type="submit" className="btn btn-dark btn-lg rounded-4 mt-2">
+            Login
+          </button>
         </form>
       </div>
     </div>

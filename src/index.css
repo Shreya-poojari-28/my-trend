@@ -33,9 +33,37 @@ body,
 }
 
 body {
-  overflow-y: scroll;
+    overflow-y: scroll;
 }
 
 .modal-open {
-  padding-right: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Animated Gradient Background */
+body {
+    background: linear-gradient(-45deg, #ffd1ba, #ffe6cc, #fff3e6, #ffe0b5);
+    background-size: 400% 400%;
+    animation: bg-move 12s ease infinite;
+}
+
+/* Dark Mode version */
+body.dark {
+    background: linear-gradient(-45deg, #0f172a, #111827, #020617, #020617);
+    background-size: 400% 400%;
+    animation: bg-move 12s ease infinite;
+}
+
+@keyframes bg-move {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }

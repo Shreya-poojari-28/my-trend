@@ -5,6 +5,7 @@ import { addToCart } from '../../../store/slices/cartSlice';
 import { addToWishList, removeWishListItem } from '../../../store/slices/wishListSlice';
 import { useNavigate } from 'react-router-dom';
 import './Product.css';
+import { toast } from 'react-toastify';
 
 const Product = ({
     productId,
@@ -30,6 +31,7 @@ const Product = ({
 
         if (isWishlisted) {
             dispatch(removeWishListItem({ productId }));
+            toast.warn("Removed from wishlist!");
         } else {
             // Trigger pop animation
             el.classList.remove("heart-pop"); // reset animation if repeated quickly
@@ -38,6 +40,7 @@ const Product = ({
 
             setTimeout(() => {
                 dispatch(addToWishList({ productId, image, price, rating, title, discountPercent }));
+                toast.info("Added to wishlist!");
             }, 200); // slightly shorter delay for smoother effect
         }
     }
@@ -45,6 +48,7 @@ const Product = ({
     const handleCartToggle = (e) => {
         e.stopPropagation();
         dispatch(addToCart({ productId, image, price, rating, title, discountPercent }));
+        toast.success("Added to cart!");
     };
 
     const discountedPrice = inrRate ? inrRate * price : price * 82;

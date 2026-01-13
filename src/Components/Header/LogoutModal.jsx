@@ -1,41 +1,49 @@
-import React, { useContext } from 'react'
-import { Modal } from 'react-bootstrap'
-import './Header.css'
-import { ThemeProvider } from '../../Contexts/ThemeProvider/ThemeProvider'
+import React, { useContext } from "react";
+import { Modal } from "react-bootstrap";
+import "./Header.css";
+import { ThemeProvider } from "../../Contexts/ThemeProvider/ThemeProvider";
+import { FiLogOut } from "react-icons/fi";
 
 const LogoutModal = ({ show, onHide }) => {
-  const { theme } = useContext(ThemeProvider)
+  const { theme } = useContext(ThemeProvider);
 
   const handleLogout = () => {
-    sessionStorage.removeItem('token')
-    onHide()
-    window.location.reload()
-  }
+    sessionStorage.removeItem("token");
+    onHide();
+    window.location.reload();
+  };
 
   return (
     <Modal
       show={show}
       onHide={onHide}
       centered
-      dialogClassName={theme === 'dark' ? 'dark-modal' : ''}
+      dialogClassName={`logout-modal ${theme}`}
+      contentClassName="logout-modal-content"
     >
-      <Modal.Header closeButton>
-        <Modal.Title>Confirm Logout</Modal.Title>
-      </Modal.Header>
+      <Modal.Body className="logout-body">
+        <div className="logout-icon-wrapper">
+          <FiLogOut className="logout-icon" />
+        </div>
 
-      <Modal.Body>
-        <p>Are you sure you want to log out?</p>
-        <div className="d-flex justify-content-end actions">
-          <button className="btn btn-secondary me-2" onClick={onHide}>
-            Cancel
+        <h5 className="logout-title">Sign out?</h5>
+
+        <p className="logout-text">
+          You will be logged out of your account. You can sign in again anytime.
+        </p>
+
+        <div className="logout-actions">
+          <button className="btn cancel-btn" onClick={onHide}>
+            Stay Logged In
           </button>
-          <button className="btn btn-danger" onClick={handleLogout}>
+
+          <button className="btn danger-btn" onClick={handleLogout}>
             Logout
           </button>
         </div>
       </Modal.Body>
     </Modal>
-  )
-}
+  );
+};
 
-export default LogoutModal
+export default LogoutModal;

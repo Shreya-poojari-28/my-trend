@@ -1,16 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./ProductDetail.css";
 import { useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getHighlights, renderStars } from "../../Helper";
 import { ThemeProvider } from "../../Contexts/ThemeProvider/ThemeProvider";
 import { addToCart } from "../../store/slices/cartSlice";
+import ProductDetailSkeleton from "./ProductDetailSkeleton";
+import { toast } from "react-toastify";
 
 const ProductDetail = () => {
     const { id } = useParams();
     const location = useLocation();
     const dispatch = useDispatch();
     const theme = useContext(ThemeProvider).theme;
+
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 800);
+        return () => clearTimeout(timer);
+    }, []);
 
     const inrRate = location.state?.inrRate || {};
     const discountPercent = location.state?.discountPercent || 0;
@@ -32,10 +41,23 @@ const ProductDetail = () => {
 
     const handleAddToCart = () => {
         dispatch(addToCart({ productId: product.id, image: product.image, price: product.price, rating: product.rating, title: product.title }));
+        toast.success("Added to cart!");
     }
+    useEffect(() => {
+        document.body.classList.toggle("dark", theme === "dark");
+    }, [theme]);
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }, []);
+
+    if (loading) return <ProductDetailSkeleton />;
 
     return (
-        <div className="container py-4">
+        <div className="container py-4 product-detail-container">
 
             {/* Breadcrumbs */}
             {/* <nav aria-label="breadcrumb">
@@ -50,7 +72,7 @@ const ProductDetail = () => {
 
                 {/* LEFT IMAGE AREA */}
                 <div className="col-lg-5">
-                    <div className="border rounded p-3 text-center shadow-sm">
+                    <div className="product-image-wrapper">
                         <img
                             src={product?.image}
                             alt={product?.title}
@@ -60,7 +82,7 @@ const ProductDetail = () => {
                     </div>
 
                     {/* Thumbnail gallery (optional) */}
-                    <div className="d-flex gap-2 mt-3 justify-content-center">
+                    <div className="d-flex gap-2 mt-3 justify-content-center product-thumbs">
                         {[product?.image, product?.image, product?.image].map((img, i) => (
                             <img
                                 key={i}
@@ -84,7 +106,7 @@ const ProductDetail = () => {
                         )}
                     </div>
 
-                    <h3 className="fw-semibold">{product?.title}</h3>
+                    <h3 className="fw-semibold product-title">{product?.title}</h3>
 
                     {/* Rating */}
                     <div className="d-flex align-items-center gap-2 mb-2">
@@ -96,7 +118,7 @@ const ProductDetail = () => {
                     <hr />
 
                     {/* PRICE BOX */}
-                    <div className="mb-3">
+                    <div className="price-box mb-3">
                         <h4 className="fw-bold text-success mb-0">₹ {formattedDiscountedPrice}</h4>
                         <small
                             className={`text-decoration-line-through ${theme === "dark" ? "" : "text-muted"
@@ -113,18 +135,19 @@ const ProductDetail = () => {
 
                     {/* ACTION BUTTONS */}
                     <div className="d-flex gap-3 my-3">
-                        <button className="btn btn-warning px-4 fw-semibold" onClick={handleAddToCart}>Add to Cart</button>
-                        <button className="btn btn-success px-4 fw-semibold">Buy Now</button>
+                        <button className="btn btn-gradient-primary px-4 fw-semibold" onClick={handleAddToCart}>Add to Cart</button>
+                        <button className="btn btn-gradient-success px-4 fw-semibold">Buy Now</button>
                     </div>
 
                     <hr />
 
                     {/* HIGHLIGHTS */}
                     <h5>Product Highlights</h5>
-                    <ul className={`list-group list-group-flush ${theme}`}>
+                    <ul className={`list-group list-group-flush highlights-list ${theme}`}>
                         {getHighlights(product?.category).map((point, i) => (
-                            <li key={i} className="list-group-item">
-                                ✅ {point}
+                            <li key={i} className={`list-group-item highlight-item ${theme} d-flex`}>
+                                <span className="bullet"></span>
+                                <span>{point}</span>
                             </li>
                         ))}
                     </ul>

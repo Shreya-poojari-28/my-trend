@@ -174,3 +174,118 @@
         justify-content: flex-start;
     }
 }
+
+/* Empty cart */
+
+.empty-cart-container {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Theme Variables */
+.empty-cart-container.light {
+  --bg-color: #f8f9fa;
+  --text-color: #000;
+  --accent-color: #6c63ff;
+  --btn-bg: #007bff;
+  --btn-hover: #0056b3;
+}
+
+.empty-cart-container.dark {
+  --bg-color: #121212;
+  --text-color: #fff;
+  --accent-color: #bb86fc;
+  --btn-bg: #bb86fc;
+  --btn-hover: #9a63e0;
+}
+
+/* Animated Cart */
+.empty-cart-animation {
+  margin-bottom: 20px;
+  position: relative;
+  width: 100px;
+  height: 80px;
+  animation: float 2s ease-in-out infinite;
+}
+
+.empty-cart {
+  width: 100px;
+  height: 60px;
+  border: 5px solid var(--accent-color);
+  border-radius: 8px 8px 0 0;
+  position: relative;
+  background-color: transparent;
+}
+
+.wheel {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  position: absolute;
+  bottom: -15px;
+}
+
+.wheel-left {
+  left: 10px;
+  animation: spin 1s linear infinite;
+}
+
+.wheel-right {
+  right: 10px;
+  animation: spin 1s linear infinite reverse;
+}
+
+/* Cart float animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Wheels spin animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Text */
+.empty-text {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  animation: pop 1.5s ease infinite;
+}
+
+.empty-subtext {
+  margin-bottom: 20px;
+  color: gray;
+  max-width: 300px;
+}
+
+/* Text pop animation */
+@keyframes pop {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Button */
+.shop-now-btn {
+  padding: 0.7rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  color: #fff;
+  background-color: var(--btn-bg);
+  transition: transform 0.3s, background-color 0.3s;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.shop-now-btn:hover {
+  background-color: var(--btn-hover);
+  transform: scale(1.1);
+}

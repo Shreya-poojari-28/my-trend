@@ -56,7 +56,7 @@ const Home = () => {
               <input
                 type="text"
                 className="form-control border-0 bg-transparent shadow-none fw-semibold"
-                placeholder="Search products..."
+                placeholder="Search for amazing products..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 style={{

@@ -6,6 +6,7 @@ import { removeWishListItem } from '../../store/slices/wishListSlice';
 import { ThemeProvider } from '../../Contexts/ThemeProvider/ThemeProvider';
 import { renderStars, ruppeeFormatter } from '../../Helper';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const WishItem = ({ ...item }) => {
     const dispatch = useDispatch()
@@ -19,6 +20,7 @@ const WishItem = ({ ...item }) => {
     const handleCartToggle = () => {
         // setCartAdded((prevState) => !prevState);
         dispatch(addToCart({ productId: item.productId, image: item.image, price: item.price, rating: item.rating, title: item.title }));
+        toast.success("Added to cart!");
     }
 
     const handleWishlistToggle = () => {
