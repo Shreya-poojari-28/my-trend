@@ -1,10 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import Product from './Product/Product'
 import { ThemeProvider } from '../../Contexts/ThemeProvider/ThemeProvider';
 import './Home.css'
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { CurrencyContext } from '../../Contexts/CurrencyProvider/CurrencyProvider';
+import { generateDiscount } from '../../Helper';
 
 const Home = () => {
   const themeData = useContext(ThemeProvider)
@@ -12,13 +13,20 @@ const Home = () => {
   const products = useSelector((state) => state?.product || [])
   // console.log('Products', products);
 
-  const { inrRate } = useContext(CurrencyContext);  
+  const { inrRate } = useContext(CurrencyContext);
+
+  const productsWithDiscount = useMemo(() => {
+    return products.map(product => ({
+      ...product,
+      discountPercent: product.discountPercent ?? generateDiscount()
+    }));
+  }, [products]);
 
   return (
     <div className={`home py-5 ${theme}`}>
       <div className="home-container d-flex flex-wrap justify-content-center">
-        {products.length === 0 ? <h2>No Products Found</h2> : (
-          products.map(({ id, image, price, rating, title }) => (
+        {productsWithDiscount.length === 0 ? <h2>No Products Found</h2> : (
+          productsWithDiscount.map(({ id, image, price, rating, title, discountPercent }) => (
             <Product
               key={id}
               productId={id}
@@ -26,6 +34,7 @@ const Home = () => {
               price={price}
               rating={rating}
               title={title}
+              discountPercent={discountPercent}
               inrRate={inrRate}
             />
           ))

@@ -8,5 +8,5 @@ export const store = configureStore({
         product: productSlice,
         cart: cartSlice,
         wishList: wishListSlice
-    }
+    },
 })

@@ -4,6 +4,7 @@
   border-radius: 8px;
   overflow: hidden;
   position: relative;
+  background-color: whitesmoke;
 }
 
 .product-container:hover {

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import './Product.css'
 import { ThemeProvider } from '../../../Contexts/ThemeProvider/ThemeProvider'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../../store/slices/cartSlice';
 import { addToWishList, removeWishListItem } from '../../../store/slices/wishListSlice';
 
@@ -11,30 +11,34 @@ const Product = ({
     price,
     rating,
     title,
+    discountPercent,
     inrRate
 }) => {
+    console.log('discountPercent', discountPercent);
+    
     const dispatch = useDispatch()
 
-    const [wishlisted, setWishlisted] = useState(false);
     const [cartAdded, setCartAdded] = useState(false);
 
     const themeData = useContext(ThemeProvider)
     const theme = themeData.theme;
 
+    const wishlist = useSelector((state) => state.wishList);
+    const isWishlisted = wishlist.some(
+        item => item.productId === productId
+    );
+
     const handleWishlistToggle = () => {
-        setWishlisted((prev) => {
-            if (prev) {
-                dispatch(removeWishListItem({ productId }))
-            } else {
-                dispatch(addToWishList({ productId, image, price, rating, title }));
-            }
-            return !prev;
-        });
+        if (isWishlisted) {
+            dispatch(removeWishListItem({ productId }));
+        } else {
+            dispatch(addToWishList({ productId, image, price, rating, title, discountPercent }));
+        }
     };
 
     const handleCartToggle = () => {
         // setCartAdded((prevState) => !prevState);
-        dispatch(addToCart({ productId, image, price, rating, title }));
+        dispatch(addToCart({ productId, image, price, rating, title, discountPercent }));
     }
 
     const ruppeeFormatter = (inrRate ? inrRate * price : price * 82)
@@ -64,6 +68,14 @@ const Product = ({
         );
     };
 
+    const discountedPrice = inrRate ? inrRate * price : price * 82;
+
+    const originalPrice = Math.round(
+        discountedPrice / (1 - discountPercent / 100)
+    );
+
+    const formattedOriginalPrice = originalPrice.toLocaleString('en-IN');
+    const formattedDiscountedPrice = discountedPrice.toLocaleString('en-IN', {maximumFractionDigits: 0})
 
     return (
         <div className="product p-2">
@@ -80,12 +92,25 @@ const Product = ({
                             ({rating.count})
                         </span>
                     </p>
-                    <p>Price: ₹ {ruppeeFormatter}</p>
+                    <p className="price">
+                        <span className="mx-2 fw-bold">
+                            ₹ {formattedDiscountedPrice}
+                        </span>
+                        <small className={`original-price ${theme === 'dark' ? '' : 'text-muted'} text-decoration-line-through`}>
+                            ₹ {formattedOriginalPrice}
+                        </small>
+                        &nbsp;
+                        <small className="discount text-success fw-bold">
+                            {discountPercent}% OFF
+                        </small>
+                    </p>
                 </div>
                 <div className="button-container text-center my-2">
                     <button className="cart-btn" onClick={handleCartToggle}>{cartAdded ? "Remove" : "Add"} item</button>
                     <button className="wishlist-btn" onClick={handleWishlistToggle}>
-                        {wishlisted ? <i className="fa-solid fa-heart"></i> : <i className="fa-regular fa-heart"></i>}
+                        {isWishlisted
+                            ? <i className="fa-solid fa-heart"></i>
+                            : <i className="fa-regular fa-heart"></i>}
                     </button>
                 </div>
             </div>

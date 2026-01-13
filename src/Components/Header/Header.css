@@ -63,6 +63,7 @@
 
 .theme.dark .inner-theme {
   transform: translateX(40px);
+  color: #000;
 }
 
 .header-container {

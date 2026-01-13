@@ -1,20 +1,17 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useMemo, useState } from 'react'
 import { CurrencyContext } from '../../Contexts/CurrencyProvider/CurrencyProvider';
 import { addToCart } from '../../store/slices/cartSlice';
 import { useDispatch } from 'react-redux';
 import { removeWishListItem } from '../../store/slices/wishListSlice';
 import { ThemeProvider } from '../../Contexts/ThemeProvider/ThemeProvider';
+import { ruppeeFormatter } from '../../Helper';
 
 const WishItem = ({ ...item }) => {
     const dispatch = useDispatch()
     const { inrRate } = useContext(CurrencyContext);
-    const theme = useContext(ThemeProvider).theme;    
+    const theme = useContext(ThemeProvider).theme;
 
     const [cartAdded, setCartAdded] = useState(false);
-
-
-    const ruppeeFormatter = (inrRate ? inrRate * item.price : item.price * 82)
-        .toLocaleString('en-IN', { maximumFractionDigits: 0 })
 
     const renderStars = (rate) => {
         const totalStars = 5;
@@ -49,6 +46,15 @@ const WishItem = ({ ...item }) => {
         dispatch(removeWishListItem({ productId: item.productId }));
     };
 
+    const discountedPrice = inrRate ? inrRate * item.price : item.price * 82;
+
+    const originalPrice = Math.round(
+        discountedPrice / (1 - item?.discountPercent / 100)
+    );
+
+    const formattedOriginalPrice = originalPrice.toLocaleString('en-IN');
+    const formattedDiscountedPrice = discountedPrice.toLocaleString('en-IN', { maximumFractionDigits: 0 })
+
     return (
         <div className='wishItem'>
             <div className={`wish-container p-4 ${theme}`}>
@@ -64,7 +70,18 @@ const WishItem = ({ ...item }) => {
                             ({item?.rating.count})
                         </span>
                     </p>
-                    <p>Price: ₹ {ruppeeFormatter}</p>
+                    <p className="price">
+                        <span className="mx-2 fw-bold">
+                            ₹ {formattedDiscountedPrice}
+                        </span>
+                        <small className={`original-price ${theme === 'dark' ? '' : 'text-muted'} text-decoration-line-through`}>
+                            ₹ {formattedOriginalPrice}
+                        </small>
+                        &nbsp;
+                        <small className="discount text-success fw-bold">
+                            {item.discountPercent}% OFF
+                        </small>
+                    </p>
                 </div>
                 <div className="button-container text-center my-2">
                     <button className="cart-btn" onClick={handleCartToggle}>{cartAdded ? "Remove" : "Add"} item</button>

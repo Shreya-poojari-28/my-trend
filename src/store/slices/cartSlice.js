@@ -30,7 +30,7 @@ const slice = createSlice({
     }
 })
 
-console.log('SLice', slice?.caseReducers);
+// console.log('SLice', slice?.caseReducers);
 
 
 export const {
