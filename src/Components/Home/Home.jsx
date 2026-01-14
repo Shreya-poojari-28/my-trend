@@ -1,9 +1,13 @@
-import React, { useContext, useMemo, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import Product from './Product/Product'
 import { ThemeProvider } from '../../Contexts/ThemeProvider/ThemeProvider';
 import { useSelector } from 'react-redux';
 import { CurrencyContext } from '../../Contexts/CurrencyProvider/CurrencyProvider';
 import { generateDiscount } from '../../Helper';
+import './Home.css'
+import Aos from 'aos';
+import 'aos/dist/aos.css';
+import EmptyProducts from './EmptyProducts/EmptyProducts';
 
 const Home = () => {
 
@@ -26,22 +30,26 @@ const Home = () => {
     );
   }, [productsWithDiscount, searchTerm]);
 
+  useEffect(() => {
+    Aos.init({ duration: 800, easing: 'ease-in-out', once: true });
+  }, []);
+
   return (
     <div className={`py-5 ${theme === "dark" ? "bg-dark text-light" : "bg-light"}`}>
 
       {/* HERO SECTION */}
       <div className="container text-center mb-4">
-        <div className="p-4 rounded-4 shadow-sm 
-            bg-gradient 
-            bg-opacity-75 
-            bg-body-tertiary">
-          <h1 className="fw-bold mb-2">
-            Discover Premium Products
-          </h1>
-          <p className="text-muted">
-            Hand-picked items, best prices, fast delivery
-          </p>
+
+        <div className="p-4 rounded-4 shadow-sm bg-gradient bg-opacity-75 bg-body-tertiary hero-text">
+          <h1 className="fw-bold mb-2">Discover Premium Products</h1>
+          <p className="text-muted">Hand-picked items, best prices, fast delivery</p>
         </div>
+
+        <div className="floating-elements">
+          <span className="float-circle" style={{ top: '20%', left: '10%' }}></span>
+          <span className="float-circle" style={{ top: '60%', right: '15%' }}></span>
+        </div>
+
       </div>
 
       {/* SEARCH BAR */}
@@ -55,7 +63,7 @@ const Home = () => {
               </span>
               <input
                 type="text"
-                className="form-control border-0 bg-transparent shadow-none fw-semibold"
+                className={`form-control border-0 bg-transparent shadow-none fw-semibold input-group search-bar ${theme}`}
                 placeholder="Search for amazing products..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -81,22 +89,29 @@ const Home = () => {
 
           {filteredProducts.length === 0 && (
             <div className="text-center py-5">
-              <h4>No products found</h4>
+              <EmptyProducts setSearchTerm={setSearchTerm}/>
             </div>
           )}
 
-          {filteredProducts.map(({ id, image, price, rating, title, discountPercent }) => (
-            <Product
-              key={id}
-              productId={id}
-              image={image}
-              price={price}
-              rating={rating}
-              title={title}
-              discountPercent={discountPercent}
-              inrRate={inrRate}
-            />
-          ))}
+          <div className="row g-4">
+            {filteredProducts.map(({ id, image, price, rating, title, discountPercent }) => (
+              <div
+                key={id}
+                data-aos="fade-up"
+                className="col-12 col-sm-6 col-md-4 col-lg-3"
+              >
+                <Product
+                  productId={id}
+                  image={image}
+                  price={price}
+                  rating={rating}
+                  title={title}
+                  discountPercent={discountPercent}
+                  inrRate={inrRate}
+                />
+              </div>
+            ))}
+          </div>
 
         </div>
       </div>
