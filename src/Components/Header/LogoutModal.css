@@ -1,0 +1,115 @@
+
+/* ---------- Container ---------- */
+.logout-modal .modal-dialog {
+  transform: scale(0.96);
+  transition: transform 0.25s ease, opacity 0.2s ease;
+  background: transparent !important;
+  height: 12px !important;
+  margin: auto;
+  border: none;
+}
+
+.logout-modal.show .modal-dialog {
+  transform: scale(1);
+}
+
+.modal.show .modal-dialog {
+    transform: none;
+    height: 12px !important;
+    background-color: transparent;
+}
+
+/* ---------- Glass Card ---------- */
+.logout-modal-content {
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  padding: 18px 20px;
+  overflow: hidden; 
+}
+
+/* ---------- Light Theme ---------- */
+.logout-modal.light .logout-modal-content {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* ---------- Dark Theme ---------- */
+.logout-modal.dark .logout-modal-content {
+  background: rgba(25, 27, 31, 0.8);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #e7e9ec;
+}
+
+/* ---------- Icon Circle ---------- */
+.logout-icon-wrapper {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: auto;
+  margin-top: 6px;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #ff7676, #ff3b62);
+}
+
+.logout-icon {
+  font-size: 26px;
+  color: #fff;
+}
+
+/* ---------- Text ---------- */
+.logout-title {
+  text-align: center;
+  margin-top: 6px;
+  font-weight: 700;
+}
+
+.logout-text {
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 14px;
+  opacity: 0.85;
+}
+
+/* ---------- Actions ---------- */
+.logout-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* ---------- Buttons ---------- */
+.cancel-btn {
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 10px;
+  padding: 6px 12px;
+}
+
+.danger-btn {
+  background: linear-gradient(135deg, #ff5252, #ff1744);
+  color: white;
+  border-radius: 10px;
+  padding: 6px 14px;
+  border: none;
+}
+
+/* Hover */
+.cancel-btn:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+.danger-btn:hover {
+  opacity: .9;
+}
+
+/* Dark adjustments */
+.logout-modal.dark .cancel-btn {
+  border-color: rgba(255,255,255,0.25);
+  color: #e7e9ec;
+}
+
+.logout-modal.dark .cancel-btn:hover {
+  background: rgba(255,255,255,0.08);
+}

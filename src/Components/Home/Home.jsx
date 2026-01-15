@@ -53,7 +53,7 @@ const Home = () => {
       </div>
 
       {/* SEARCH BAR */}
-      <div className="container mb-4">
+      <div className="container mb-5">
         <div className="row justify-content-center">
           <div className="col-lg-6 col-md-8">
 
@@ -93,12 +93,12 @@ const Home = () => {
             </div>
           )}
 
-          <div className="row g-4">
+          <div className="row g-4 products-container">
             {filteredProducts.map(({ id, image, price, rating, title, discountPercent }) => (
               <div
                 key={id}
                 data-aos="fade-up"
-                className="col-12 col-sm-6 col-md-4 col-lg-3"
+                className="col-12 col-sm-6 col-md-4 col-lg-3 product-card"
               >
                 <Product
                   productId={id}

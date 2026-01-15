@@ -18,6 +18,10 @@ body,
     margin: 0;
 }
 
+body.menu-open {
+    overflow-x: hidden;
+}
+
 .app-layout {
     min-height: 100vh;
     display: flex;

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Modal } from "react-bootstrap";
-import "./Header.css";
+import "./LogoutModal.css";
 import { ThemeProvider } from "../../Contexts/ThemeProvider/ThemeProvider";
 import { FiLogOut } from "react-icons/fi";
 
