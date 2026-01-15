@@ -57,9 +57,9 @@ const Home = () => {
         <div className="row justify-content-center">
           <div className="col-lg-6 col-md-8">
 
-            <div className="input-group shadow rounded-pill">
-              <span className="input-group-text bg-transparent border-0">
-                <i className="bi bi-search"></i>
+            <div className={`input-group shadow rounded-pill search-bar-container ${theme}`}>
+              <span className={`input-group-text bg-transparent border-0 search-icon ${theme}`}>
+                <i class="fa-solid fa-magnifying-glass"></i>
               </span>
               <input
                 type="text"

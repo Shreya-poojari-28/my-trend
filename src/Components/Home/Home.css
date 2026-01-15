@@ -43,6 +43,20 @@
 }
 
 .search-bar.dark {
+    color: #fff !important;
+}
+
+.search-bar.dark::placeholder {
     color: #fff;
 }
 
+.search-icon {
+    margin-left: 20px;
+}
+.search-icon.dark i {
+    color: #fff;
+}
+
+.search-bar-container.dark {
+    background-color: #27292B;
+}
